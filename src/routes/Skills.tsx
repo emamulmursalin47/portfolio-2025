@@ -1,7 +1,18 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+import React, { useEffect, useRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+// Register ScrollTrigger plugin
+gsap.registerPlugin(ScrollTrigger);
 
 const Skills = () => {
+  const skillsRefs = useRef([]);
+  const progressRefs = useRef([]);
+  const certificationRef = useRef(null);
+  const toolsRef = useRef(null);
+
   const skillCategories = [
     {
       title: 'Frontend Development',
@@ -34,22 +45,125 @@ const Skills = () => {
     },
   ];
 
+  useEffect(() => {
+    // Animate skill category cards
+    //@ts-ignore
+    skillsRefs.current.forEach((ref, index) => {
+      gsap.fromTo(
+        ref,
+        {
+          opacity: 0,
+          y: 50,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          scrollTrigger: {
+            trigger: ref,
+            start: 'top center+=100',
+            end: 'top center-=100',
+            scrub: 1,
+            toggleActions: 'play reverse play reverse'
+          }
+        }
+      );
+    });
+
+    // Animate progress bars
+    progressRefs.current.forEach((ref) => {
+      //@ts-ignore
+      const width = ref.getAttribute('data-width');
+      gsap.fromTo(
+        ref,
+        { width: '0%' },
+        {
+          width: `${width}%`,
+          duration: 1.5,
+          scrollTrigger: {
+            trigger: ref,
+            start: 'top center+=150',
+            end: 'top center',
+            scrub: 1,
+            toggleActions: 'play reverse play reverse'
+          }
+        }
+      );
+    });
+
+    // Animate certifications section
+    gsap.fromTo(
+      certificationRef.current,
+      {
+        x: -100,
+        opacity: 0,
+      },
+      {
+        x: 0,
+        opacity: 1,
+        duration: 1,
+        scrollTrigger: {
+          trigger: certificationRef.current,
+          start: 'top center+=100',
+          end: 'top center-=100',
+          scrub: 1,
+          toggleActions: 'play reverse play reverse'
+        }
+      }
+    );
+
+    // Animate tools section
+    gsap.fromTo(
+      toolsRef.current,
+      {
+        x: 100,
+        opacity: 0,
+      },
+      {
+        x: 0,
+        opacity: 1,
+        duration: 1,
+        scrollTrigger: {
+          trigger: toolsRef.current,
+          start: 'top center+=100',
+          end: 'top center-=100',
+          scrub: 1,
+          toggleActions: 'play reverse play reverse'
+        }
+      }
+    );
+
+    return () => {
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+    };
+  }, []);
+//@ts-ignore
+  const addToSkillsRefs = (el) => {
+    //@ts-ignore
+    if (el && !skillsRefs.current.includes(el)) {
+      //@ts-ignore
+      skillsRefs.current.push(el);
+    }
+  };
+//@ts-ignore
+  const addToProgressRefs = (el) => {
+    //@ts-ignore
+    if (el && !progressRefs.current.includes(el)) {
+      //@ts-ignore
+      progressRefs.current.push(el);
+    }
+  };
+
   return (
-    <div className="container mx-auto px-4 py-32">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-      >
+    <div className="container mx-auto px-4 py-24">
+      <div>
         <h1 className="text-4xl font-bold text-white mb-12">Skills & Expertise</h1>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {skillCategories.map((category, categoryIndex) => (
-            <motion.div
+            <div
               key={categoryIndex}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: categoryIndex * 0.1 }}
+              ref={addToSkillsRefs}
               className="bg-black/30 backdrop-blur-md rounded-xl p-6"
             >
               <h2 className="text-2xl font-bold text-white mb-6">{category.title}</h2>
@@ -61,27 +175,24 @@ const Skills = () => {
                       <span className="text-purple-400">{skill.level}%</span>
                     </div>
                     <div className="h-2 bg-gray-700 rounded-full overflow-hidden">
-                      <motion.div
-                        initial={{ width: 0 }}
-                        animate={{ width: `${skill.level}%` }}
-                        transition={{ duration: 1, delay: skillIndex * 0.1 }}
+                      <div
+                        ref={addToProgressRefs}
+                        data-width={skill.level}
                         className="h-full bg-gradient-to-r from-purple-500 to-purple-700 rounded-full"
                       />
                     </div>
                   </div>
                 ))}
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8"
-        >
-          <div className="bg-black/30 backdrop-blur-md rounded-xl p-6">
+        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div
+            ref={certificationRef}
+            className="bg-black/30 backdrop-blur-md rounded-xl p-6"
+          >
             <h2 className="text-2xl font-bold text-white mb-6">Certifications</h2>
             <div className="space-y-4">
               <div className="p-4 bg-purple-500/10 rounded-lg">
@@ -99,7 +210,10 @@ const Skills = () => {
             </div>
           </div>
 
-          <div className="bg-black/30 backdrop-blur-md rounded-xl p-6">
+          <div
+            ref={toolsRef}
+            className="bg-black/30 backdrop-blur-md rounded-xl p-6"
+          >
             <h2 className="text-2xl font-bold text-white mb-6">Tools & Technologies</h2>
             <div className="grid grid-cols-2 gap-4">
               {[
@@ -112,21 +226,18 @@ const Skills = () => {
                 'Figma',
                 'VS Code',
               ].map((tool, index) => (
-                <motion.div
+                <div
                   key={index}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
                   className="flex items-center gap-2 text-gray-300"
                 >
                   <div className="w-2 h-2 bg-purple-500 rounded-full" />
                   {tool}
-                </motion.div>
+                </div>
               ))}
             </div>
           </div>
-        </motion.div>
-      </motion.div>
+        </div>
+      </div>
     </div>
   );
 };

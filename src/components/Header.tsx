@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Moon, Sun } from 'lucide-react';
@@ -7,12 +7,24 @@ const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isDark, setIsDark] = useState(true);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState('/');
   const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
+      
+      // Update active section based on scroll position
+      const sections = document.querySelectorAll('section');
+      sections.forEach(section => {
+        const rect = section.getBoundingClientRect();
+        const id = section.id;
+        if (rect.top <= 150 && rect.bottom >= 150) {
+          setActiveSection(`/${id}`);
+        }
+      });
     };
+
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -46,13 +58,20 @@ const Header = () => {
               <Link
                 key={item.path}
                 to={item.path}
-                className={`text-sm font-medium transition-colors ${
-                  location.pathname === item.path
+                className="relative group"
+              >
+                <span className={`text-sm font-medium transition-colors ${
+                  (location.pathname === item.path || activeSection === item.path)
                     ? 'text-purple-400'
                     : 'text-gray-300 hover:text-white'
-                }`}
-              >
-                {item.label}
+                }`}>
+                  {item.label}
+                </span>
+                <span className={`absolute -bottom-1 left-0 w-0 h-0.5 bg-purple-400 transition-all duration-300 ${
+                  (location.pathname === item.path || activeSection === item.path)
+                    ? 'w-full'
+                    : 'group-hover:w-full'
+                }`} />
               </Link>
             ))}
             <button
@@ -91,7 +110,7 @@ const Header = () => {
                   to={item.path}
                   onClick={() => setIsOpen(false)}
                   className={`text-sm font-medium transition-colors ${
-                    location.pathname === item.path
+                    (location.pathname === item.path || activeSection === item.path)
                       ? 'text-purple-400'
                       : 'text-gray-300 hover:text-white'
                   }`}

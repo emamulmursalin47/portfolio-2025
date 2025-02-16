@@ -1,11 +1,18 @@
-import React from 'react';
+
 import { motion } from 'framer-motion';
 import { ArrowRight, Download, Mail } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import Skills from './Skills';
+import Projects from './Projects';
+import Experience from './Experience';
+import Blog from './Blog';
+import Contact from './Contact';
+
 
 const Home = () => {
   return (
-    <motion.div 
+    <div>
+ <motion.div 
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-violet-900"
@@ -90,60 +97,18 @@ const Home = () => {
         </div>
 
         {/* Featured Skills Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1 }}
-          className="mt-32"
-        >
-          <h2 className="text-3xl font-bold text-white mb-12 text-center">Featured Skills</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {[
-              {
-                title: 'System Architecture',
-                description: 'Designing scalable and efficient systems',
-                percentage: 90,
-              },
-              {
-                title: 'Full-Stack Development',
-                description: 'Building end-to-end web applications',
-                percentage: 85,
-              },
-              {
-                title: 'AI/ML Integration',
-                description: 'Implementing intelligent solutions',
-                percentage: 80,
-              },
-              {
-                title: 'Technical Leadership',
-                description: 'Leading teams and projects',
-                percentage: 85,
-              },
-            ].map((skill, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 + 1 }}
-                className="bg-black/30 backdrop-blur-md p-6 rounded-xl"
-              >
-                <h3 className="text-xl font-bold text-white mb-2">{skill.title}</h3>
-                <p className="text-gray-400 mb-4">{skill.description}</p>
-                <div className="w-full h-2 bg-gray-700 rounded-full overflow-hidden">
-                  <motion.div
-                    initial={{ width: 0 }}
-                    animate={{ width: `${skill.percentage}%` }}
-                    transition={{ duration: 1, delay: index * 0.2 + 1.5 }}
-                    className="h-full bg-gradient-to-r from-purple-500 to-purple-700 rounded-full"
-                  />
-                </div>
-                <p className="text-right text-purple-400 mt-2">{skill.percentage}%</p>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
+       
       </div>
+      
     </motion.div>
+    <Skills/>
+        <Projects/>
+        <Experience/>
+        <Blog/>
+        <Contact/>
+    </div>
+   
+    
   );
 };
 

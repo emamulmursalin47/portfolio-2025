@@ -1,8 +1,19 @@
-import React from 'react';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Briefcase, GraduationCap, Award } from 'lucide-react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+// Register ScrollTrigger plugin
+gsap.registerPlugin(ScrollTrigger);
 
 const Experience = () => {
+  const timelineRef = useRef(null);
+  const experienceRefs = useRef([]);
+  const leadershipRefs = useRef([]);
+
   const experiences = [
     {
       title: 'System Architecture Specialist',
@@ -70,6 +81,88 @@ const Experience = () => {
       icon: <Award className="w-6 h-6" />,
     },
   ];
+  useEffect(() => {
+    // Timeline animation
+    gsap.from(timelineRef.current, {
+      height: 0,
+      scrollTrigger: {
+        trigger: timelineRef.current,
+        start: 'top center',
+        end: 'bottom center',
+        scrub: 1,
+        toggleActions: 'play reverse play reverse'
+      }
+    });
+
+    // Experience items animations
+    experienceRefs.current.forEach((item, index) => {
+      const direction = index % 2 === 0 ? -100 : 100;
+      
+      gsap.fromTo(
+        item,
+        {
+          x: direction,
+          opacity: 0
+        },
+        {
+          x: 0,
+          opacity: 1,
+          duration: 1,
+          scrollTrigger: {
+            trigger: item,
+            start: 'top center+=100',
+            end: 'top center-=100',
+            scrub: 1,
+            toggleActions: 'play reverse play reverse'
+          }
+        }
+      );
+    });
+
+    // Leadership items animations
+    //@ts-ignore
+    leadershipRefs.current.forEach((item, index) => {
+      gsap.fromTo(
+        item,
+        {
+          y: 50,
+          opacity: 0
+        },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 1,
+          scrollTrigger: {
+            trigger: item,
+            start: 'top center+=100',
+            end: 'top center-=100',
+            scrub: 1,
+            toggleActions: 'play reverse play reverse'
+          }
+        }
+      );
+    });
+
+    return () => {
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+    };
+  }, []);
+//@ts-ignore
+  const addToExperienceRefs = (el) => {
+    //@ts-ignore
+    if (el && !experienceRefs.current.includes(el)) {
+      //@ts-ignore
+      experienceRefs.current.push(el);
+    }
+  };
+//@ts-ignore
+  const addToLeadershipRefs = (el) => {
+    //@ts-ignore
+    if (el && !leadershipRefs.current.includes(el)) {
+      //@ts-ignore
+      leadershipRefs.current.push(el);
+    }
+  };
 
   return (
     <div className="container mx-auto px-4 py-32">
@@ -82,16 +175,17 @@ const Experience = () => {
 
         <div className="relative">
           {/* Timeline line */}
-          <div className="absolute left-0 md:left-1/2 h-full w-px bg-purple-500/30 transform -translate-x-1/2" />
+          <div 
+            ref={timelineRef}
+            className="absolute left-0 md:left-1/2 h-full w-px bg-purple-500/30 transform -translate-x-1/2" 
+          />
 
           {/* Experience items */}
           <div className="space-y-12">
             {experiences.map((exp, index) => (
-              <motion.div
+              <div
                 key={index}
-                initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
+                ref={addToExperienceRefs}
                 className={`flex flex-col md:flex-row gap-8 ${
                   index % 2 === 0 ? 'md:flex-row-reverse' : ''
                 }`}
@@ -118,25 +212,18 @@ const Experience = () => {
                     </ul>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
 
           {/* Leadership section */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.5 }}
-            className="mt-16"
-          >
+          <div className="mt-16">
             <h2 className="text-3xl font-bold text-white mb-8">Leadership Roles</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {leadership.map((role, index) => (
-                <motion.div
+                <div
                   key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 + 0.5 }}
+                  ref={addToLeadershipRefs}
                   className="bg-black/30 backdrop-blur-md p-6 rounded-xl"
                 >
                   <div className="flex items-center gap-4 mb-4">
@@ -150,10 +237,10 @@ const Experience = () => {
                   </div>
                   <p className="text-gray-400 mb-2">{role.period}</p>
                   <p className="text-gray-300">{role.description}</p>
-                </motion.div>
+                </div>
               ))}
             </div>
-          </motion.div>
+          </div>
         </div>
       </motion.div>
     </div>

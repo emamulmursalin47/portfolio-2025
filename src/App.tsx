@@ -1,14 +1,16 @@
-import React from 'react';
+
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import ParticlesBackground from './components/ParticlesBackground';
-import Home from './routes/Home';
+
 import Projects from './routes/Projects';
 import Skills from './routes/Skills';
 import Experience from './routes/Experience';
 import Blog from './routes/Blog';
+import Home from './routes/Home';
 import Contact from './routes/Contact';
+
 
 function App() {
   return (
