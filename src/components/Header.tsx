@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
@@ -7,20 +8,20 @@ const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isDark, setIsDark] = useState(true);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [activeSection, setActiveSection] = useState('/');
+  const [activeSection, setActiveSection] = useState('#home');
   const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
-      
-      // Update active section based on scroll position
       const sections = document.querySelectorAll('section');
-      sections.forEach(section => {
-        const rect = section.getBoundingClientRect();
-        const id = section.id;
-        if (rect.top <= 150 && rect.bottom >= 150) {
-          setActiveSection(`/${id}`);
+      const scrollPosition = window.scrollY + 150;
+
+      sections.forEach((section) => {
+        const top = section.offsetTop;
+        const bottom = top + section.offsetHeight;
+        if (scrollPosition >= top && scrollPosition < bottom) {
+          setActiveSection(`#${section.id}`);
         }
       });
     };
@@ -30,12 +31,12 @@ const Header = () => {
   }, []);
 
   const navItems = [
-    { path: '/', label: 'Home' },
-    { path: '/projects', label: 'Projects' },
-    { path: '/skills', label: 'Skills' },
-    { path: '/experience', label: 'Experience' },
-    { path: '/blog', label: 'Blog' },
-    { path: '/contact', label: 'Contact' },
+    { hash: '#home', label: 'Home' },
+    { hash: '#projects', label: 'Projects' },
+    { hash: '#skills', label: 'Skills' },
+    { hash: '#experience', label: 'Experience' },
+    { hash: '#blog', label: 'Blog' },
+    { hash: '#contact', label: 'Contact' },
   ];
 
   return (
@@ -55,44 +56,52 @@ const Header = () => {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => (
-              <Link
-                key={item.path}
-                to={item.path}
+              <a
+                key={item.hash}
+                href={item.hash}
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.querySelector(item.hash)?.scrollIntoView({ behavior: 'smooth' });
+                  setActiveSection(item.hash);
+                }}
                 className="relative group"
               >
-                <span className={`text-sm font-medium transition-colors ${
-                  (location.pathname === item.path || activeSection === item.path)
-                    ? 'text-purple-400'
-                    : 'text-gray-300 hover:text-white'
-                }`}>
+                <span
+                  className={`text-sm font-medium transition-colors ${
+                    activeSection === item.hash
+                      ? 'text-purple-400'
+                      : 'text-gray-300 hover:text-white'
+                  }`}
+                >
                   {item.label}
                 </span>
-                <span className={`absolute -bottom-1 left-0 w-0 h-0.5 bg-purple-400 transition-all duration-300 ${
-                  (location.pathname === item.path || activeSection === item.path)
-                    ? 'w-full'
-                    : 'group-hover:w-full'
-                }`} />
-              </Link>
+                <span
+                  className={`absolute -bottom-1 left-0 w-0 h-0.5 bg-purple-400 transition-all duration-300 ${
+                    activeSection === item.hash ? 'w-full' : 'group-hover:w-full'
+                  }`}
+                />
+              </a>
             ))}
             <button
               onClick={() => setIsDark(!isDark)}
               className="p-2 rounded-full hover:bg-white/10 transition-colors"
             >
-              {isDark ? (
-                <Sun className="w-5 h-5 text-gray-300" />
-              ) : (
-                <Moon className="w-5 h-5 text-gray-300" />
-              )}
+              {isDark ? <Sun className="w-5 h-5 text-gray-300" /> : <Moon className="w-5 h-5 text-gray-300" />}
             </button>
           </div>
 
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden p-2 text-white"
-          >
-            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
+          {/* Mobile Menu Button and Dark Mode Toggle */}
+          <div className="flex items-center md:hidden space-x-4">
+            <button
+              onClick={() => setIsDark(!isDark)}
+              className="p-2 rounded-full hover:bg-white/10 transition-colors"
+            >
+              {isDark ? <Sun className="w-5 h-5 text-gray-300" /> : <Moon className="w-5 h-5 text-gray-300" />}
+            </button>
+            <button onClick={() => setIsOpen(!isOpen)} className="p-2 text-white">
+              {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
         </div>
 
         {/* Mobile Navigation */}
@@ -105,18 +114,23 @@ const Header = () => {
           >
             <div className="flex flex-col space-y-4 px-4">
               {navItems.map((item) => (
-                <Link
-                  key={item.path}
-                  to={item.path}
-                  onClick={() => setIsOpen(false)}
+                <a
+                  key={item.hash}
+                  href={item.hash}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    document.querySelector(item.hash)?.scrollIntoView({ behavior: 'smooth' });
+                    setActiveSection(item.hash);
+                    setIsOpen(false);
+                  }}
                   className={`text-sm font-medium transition-colors ${
-                    (location.pathname === item.path || activeSection === item.path)
+                    activeSection === item.hash
                       ? 'text-purple-400'
                       : 'text-gray-300 hover:text-white'
                   }`}
                 >
                   {item.label}
-                </Link>
+                </a>
               ))}
             </div>
           </motion.div>

@@ -155,7 +155,7 @@ const Skills = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-24">
+    <div className="container mx-auto px-4 py-24" id="skills">
       <div>
         <h1 className="text-4xl font-bold text-white mb-12">Skills & Expertise</h1>
         
