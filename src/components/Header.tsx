@@ -96,7 +96,7 @@ const Header = () => {
         initial={{ x: '100%' }}
         animate={{ x: isOpen ? 0 : '100%' }}
         transition={{ type: 'spring', stiffness: 100 }}
-        className={`fixed top-0 right-0 h-full w-64 bg-black/90 backdrop-blur-lg p-6 flex flex-col space-y-6 items-center md:hidden transition-transform duration-300 ${
+        className={`fixed top-0 right-0 h-full w-64 bg-purple-950 backdrop-blur-lg p-6 flex flex-col space-y-6 items-center md:hidden transition-transform duration-300 ${
           isOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
