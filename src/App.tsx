@@ -15,7 +15,7 @@ import Contact from './routes/Contact';
 function App() {
   return (
     <Router>
-      <div className="relative min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-violet-900">
+      <div className="relative min-h-screen overflow-x-hidden bg-gradient-to-br from-gray-900 via-purple-900 to-violet-900">
         <ParticlesBackground />
         <Header />
         <main className="relative z-10">

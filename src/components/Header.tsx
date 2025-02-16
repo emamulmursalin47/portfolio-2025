@@ -1,22 +1,21 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Moon, Sun } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Menu, X, Sun, Moon } from 'lucide-react';
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isDark, setIsDark] = useState(true);
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('#home');
-  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
       const sections = document.querySelectorAll('section');
       const scrollPosition = window.scrollY + 150;
-
+      
       sections.forEach((section) => {
         const top = section.offsetTop;
         const bottom = top + section.offsetHeight;
@@ -47,95 +46,81 @@ const Header = () => {
         isScrolled ? 'bg-black/80 backdrop-blur-md' : 'bg-transparent'
       }`}
     >
-      <nav className="container mx-auto px-4 py-4">
-        <div className="flex items-center justify-between">
-          <Link to="/" className="text-2xl font-bold text-white">
-            EM<span className="text-purple-500">.</span>
-          </Link>
+      <nav className="container mx-auto px-6 py-4 flex items-center justify-between">
+        <Link to="/" className="text-2xl font-bold text-white">
+          EM<span className="text-purple-500">.</span>
+        </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            {navItems.map((item) => (
-              <a
-                key={item.hash}
-                href={item.hash}
-                onClick={(e) => {
-                  e.preventDefault();
-                  document.querySelector(item.hash)?.scrollIntoView({ behavior: 'smooth' });
-                  setActiveSection(item.hash);
-                }}
-                className="relative group"
-              >
-                <span
-                  className={`text-sm font-medium transition-colors ${
-                    activeSection === item.hash
-                      ? 'text-purple-400'
-                      : 'text-gray-300 hover:text-white'
-                  }`}
-                >
-                  {item.label}
-                </span>
-                <span
-                  className={`absolute -bottom-1 left-0 w-0 h-0.5 bg-purple-400 transition-all duration-300 ${
-                    activeSection === item.hash ? 'w-full' : 'group-hover:w-full'
-                  }`}
-                />
-              </a>
-            ))}
-            <button
-              onClick={() => setIsDark(!isDark)}
-              className="p-2 rounded-full hover:bg-white/10 transition-colors"
+        {/* Desktop Navigation */}
+        <div className="hidden md:flex items-center space-x-8">
+          {navItems.map((item) => (
+            <a
+              key={item.hash}
+              href={item.hash}
+              onClick={(e) => {
+                e.preventDefault();
+                document.querySelector(item.hash)?.scrollIntoView({ behavior: 'smooth' });
+                setActiveSection(item.hash);
+              }}
+              className={`relative text-sm font-medium transition-colors ${
+                activeSection === item.hash ? 'text-purple-400' : 'text-gray-300 hover:text-white'
+              }`}
             >
-              {isDark ? <Sun className="w-5 h-5 text-gray-300" /> : <Moon className="w-5 h-5 text-gray-300" />}
-            </button>
-          </div>
-
-          {/* Mobile Menu Button and Dark Mode Toggle */}
-          <div className="flex items-center md:hidden space-x-4">
-            <button
-              onClick={() => setIsDark(!isDark)}
-              className="p-2 rounded-full hover:bg-white/10 transition-colors"
-            >
-              {isDark ? <Sun className="w-5 h-5 text-gray-300" /> : <Moon className="w-5 h-5 text-gray-300" />}
-            </button>
-            <button onClick={() => setIsOpen(!isOpen)} className="p-2 text-white">
-              {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </button>
-          </div>
+              {item.label}
+            </a>
+          ))}
+          <button
+            onClick={() => setIsDark(!isDark)}
+            className="p-2 rounded-full hover:bg-white/10 transition-colors"
+          >
+            {isDark ? <Sun className="w-5 h-5 text-gray-300" /> : <Moon className="w-5 h-5 text-gray-300" />}
+          </button>
         </div>
 
-        {/* Mobile Navigation */}
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="md:hidden absolute top-full left-0 w-full bg-black/95 backdrop-blur-md py-4"
+        {/* Mobile Menu */}
+        <div className="md:hidden flex items-center space-x-4">
+          <button
+            onClick={() => setIsDark(!isDark)}
+            className="p-2 rounded-full hover:bg-white/10 transition-colors"
           >
-            <div className="flex flex-col space-y-4 px-4">
-              {navItems.map((item) => (
-                <a
-                  key={item.hash}
-                  href={item.hash}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    document.querySelector(item.hash)?.scrollIntoView({ behavior: 'smooth' });
-                    setActiveSection(item.hash);
-                    setIsOpen(false);
-                  }}
-                  className={`text-sm font-medium transition-colors ${
-                    activeSection === item.hash
-                      ? 'text-purple-400'
-                      : 'text-gray-300 hover:text-white'
-                  }`}
-                >
-                  {item.label}
-                </a>
-              ))}
-            </div>
-          </motion.div>
-        )}
+            {isDark ? <Sun className="w-5 h-5 text-gray-300" /> : <Moon className="w-5 h-5 text-gray-300" />}
+          </button>
+          <button onClick={() => setIsOpen(!isOpen)} className="p-2 text-white">
+            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
+        </div>
       </nav>
+
+      {/* Mobile Navigation */}
+      <motion.div
+        initial={{ x: '100%' }}
+        animate={{ x: isOpen ? 0 : '100%' }}
+        transition={{ type: 'spring', stiffness: 100 }}
+        className={`fixed top-0 right-0 h-full w-64 bg-black/90 backdrop-blur-lg p-6 flex flex-col space-y-6 items-center md:hidden transition-transform duration-300 ${
+          isOpen ? 'translate-x-0' : 'translate-x-full'
+        }`}
+      >
+        <button onClick={() => setIsOpen(false)} className="absolute top-4 right-4 text-white">
+          <X className="w-6 h-6" />
+        </button>
+        {navItems.map((item) => (
+          <a
+            key={item.hash}
+            href={item.hash}
+            onClick={(e) => {
+              e.preventDefault();
+              document.querySelector(item.hash)?.scrollIntoView({ behavior: 'smooth' });
+              setActiveSection(item.hash);
+              setIsOpen(false);
+            }}
+            className={`text-lg font-medium transition-colors ${
+              activeSection === item.hash ? 'text-purple-400' : 'text-gray-300 hover:text-white'
+            }`}
+          >
+            {item.label}
+          </a>
+        ))}
+      </motion.div>
     </motion.header>
   );
 };
