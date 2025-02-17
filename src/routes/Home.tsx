@@ -8,8 +8,13 @@ import Experience from './Experience';
 import Blog from './Blog';
 import Contact from './Contact';
 
+
+
+
+
 const AnimatedGradient = () => {
   return (
+    
     <motion.div 
       className="absolute inset-0 -z-10"
       animate={{
@@ -27,6 +32,7 @@ const AnimatedGradient = () => {
         ease: "linear"
       }}
     >
+   
       <div className="absolute inset-0 bg-black/10 backdrop-blur-[1px]" />
     </motion.div>
   );
@@ -35,14 +41,19 @@ const AnimatedGradient = () => {
 const Home = () => {
   return (
     <div>
+       
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         className="min-h-screen relative overflow-hidden"
       >
+        
         <AnimatedGradient />
+      
         <div className="container mx-auto px-4 pt-32 relative">
+       
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            
             <motion.div
               initial={{ y: 50, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
@@ -136,9 +147,13 @@ const Home = () => {
         <div className="absolute -inset-4 rounded-full border-2 border-purple-500/20 animate-pulse" />
       </div>
     </motion.div>
+         
           </div>
+         
         </div>
       </motion.div>
+      
+     
       <Skills/>
       <Projects/>
       <Experience/>

@@ -12,15 +12,20 @@ import Home from './routes/Home';
 import Contact from './routes/Contact';
 
 
+
+
 function App() {
   return (
     <Router>
       <div className="relative min-h-screen overflow-x-hidden bg-gradient-to-br from-gray-900 via-purple-900 to-violet-900">
         <ParticlesBackground />
+       
         <Header />
         <main className="relative z-10">
+       
           <Routes>
             <Route path="/" element={<Home />} />
+          
             <Route path="/projects" element={<Projects />} />
             <Route path="/skills" element={<Skills />} />
             <Route path="/experience" element={<Experience />} />
@@ -28,8 +33,11 @@ function App() {
             <Route path="/contact" element={<Contact />} />
           </Routes>
         </main>
+       
         <Footer />
+      
       </div>
+
     </Router>
   );
 }

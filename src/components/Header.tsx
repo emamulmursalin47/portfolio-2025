@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Menu, X, Sun, Moon } from 'lucide-react';
+import FloatingIcons from './FloatingIcons';
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -46,6 +47,7 @@ const Header = () => {
         isScrolled ? 'bg-black/80 backdrop-blur-md' : 'bg-transparent'
       }`}
     >
+       <FloatingIcons/>
       <nav className="container mx-auto px-6 py-4 flex items-center justify-between">
         <Link to="/" className="text-2xl font-bold text-white">
           EM<span className="text-purple-500">.</span>

@@ -6,6 +6,7 @@ import { Briefcase, GraduationCap, Award } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
+
 // Register ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
 
@@ -166,6 +167,7 @@ const Experience = () => {
 
   return (
     <div className="container mx-auto px-4 py-32" id="experience">
+     
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
