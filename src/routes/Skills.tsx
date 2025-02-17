@@ -3,6 +3,7 @@
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { motion } from 'framer-motion'; // Import motion from framer-motion
 
 // Register ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
@@ -137,7 +138,8 @@ const Skills = () => {
       ScrollTrigger.getAll().forEach(trigger => trigger.kill());
     };
   }, []);
-//@ts-ignore
+
+  //@ts-ignore
   const addToSkillsRefs = (el) => {
     //@ts-ignore
     if (el && !skillsRefs.current.includes(el)) {
@@ -145,7 +147,8 @@ const Skills = () => {
       skillsRefs.current.push(el);
     }
   };
-//@ts-ignore
+
+  //@ts-ignore
   const addToProgressRefs = (el) => {
     //@ts-ignore
     if (el && !progressRefs.current.includes(el)) {
@@ -238,6 +241,34 @@ const Skills = () => {
           </div>
         </div>
       </div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.3 }}
+        className="mt-16"
+      >
+        <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8">GitHub Statistics</h2>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+         
+          
+        </div>
+        
+        
+
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5, delay: 0.6 }}
+          className="bg-white/30 dark:bg-black/30 backdrop-blur-md rounded-xl p-6"
+        >
+          <img
+            src="https://github-readme-activity-graph.vercel.app/graph?username=emamulmursalin47&theme=github-light&hide_border=true"
+            alt="Activity Graph"
+            className="w-full"
+          />
+        </motion.div>
+      </motion.div>
     </div>
   );
 };

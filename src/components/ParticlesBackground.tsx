@@ -1,11 +1,8 @@
-import { useCallback, useEffect, useRef } from 'react';
-import { useTheme } from '../context/ThemeContext';
-
+import React, { useCallback, useEffect, useRef } from 'react';
 
 const ParticlesBackground = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const particlesRef = useRef<{ x: number; y: number; vx: number; vy: number; size: number }[]>([]);
-  const { theme } = useTheme();
   
   const createParticle = useCallback((x: number, y: number) => {
     return {
@@ -62,9 +59,7 @@ const ParticlesBackground = () => {
 
         ctx.beginPath();
         ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-        ctx.fillStyle = theme === 'dark' 
-          ? `rgba(147, 51, 234, ${0.2 + Math.random() * 0.3})`
-          : `rgba(147, 51, 234, ${0.1 + Math.random() * 0.2})`;
+        ctx.fillStyle = `rgba(147, 51, 234, ${0.2 + Math.random() * 0.3})`;
         ctx.fill();
 
         // Draw connections
@@ -76,9 +71,7 @@ const ParticlesBackground = () => {
 
           if (distance < 150) {
             ctx.beginPath();
-            ctx.strokeStyle = theme === 'dark'
-              ? `rgba(147, 51, 234, ${0.1 * (1 - distance / 150)})`
-              : `rgba(147, 51, 234, ${0.05 * (1 - distance / 150)})`;
+            ctx.strokeStyle = `rgba(147, 51, 234, ${0.1 * (1 - distance / 150)})`;
             ctx.lineWidth = 1;
             ctx.moveTo(particle.x, particle.y);
             ctx.lineTo(particle2.x, particle2.y);
@@ -96,7 +89,7 @@ const ParticlesBackground = () => {
       window.removeEventListener('resize', resizeCanvas);
       cancelAnimationFrame(animationFrameId);
     };
-  }, [createParticle, theme]);
+  }, [createParticle]);
 
   return (
     <canvas
