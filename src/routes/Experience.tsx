@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import React, { useEffect, useRef } from 'react';
+import  { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Briefcase, GraduationCap, Award } from 'lucide-react';
 import gsap from 'gsap';
