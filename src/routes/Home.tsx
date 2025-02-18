@@ -5,7 +5,7 @@ import { ArrowRight, Download, Mail } from 'lucide-react';
 import Skills from './Skills';
 import Projects from './Projects';
 import Experience from './Experience';
-import Blog from './Blog';
+// import Blog from './Blog';
 import Contact from './Contact';
 
 
@@ -157,7 +157,7 @@ const Home = () => {
       <Skills/>
       <Projects/>
       <Experience/>
-      <Blog/>
+      {/* <Blog/> */}
       <Contact/>
     </div>
   );

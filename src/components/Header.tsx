@@ -35,7 +35,7 @@ const Header = () => {
     { hash: '#projects', label: 'Projects' },
     { hash: '#skills', label: 'Skills' },
     { hash: '#experience', label: 'Experience' },
-    { hash: '#blog', label: 'Blog' },
+    // { hash: '#blog', label: 'Blog' },
     { hash: '#contact', label: 'Contact' },
   ];
 

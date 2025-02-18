@@ -7,9 +7,11 @@ import ParticlesBackground from './components/ParticlesBackground';
 import Projects from './routes/Projects';
 import Skills from './routes/Skills';
 import Experience from './routes/Experience';
-import Blog from './routes/Blog';
+// import Blog from './routes/Blog';
+
 import Home from './routes/Home';
 import Contact from './routes/Contact';
+// import BlogPost from './routes/BlogPost';
 
 
 
@@ -29,7 +31,8 @@ function App() {
             <Route path="/projects" element={<Projects />} />
             <Route path="/skills" element={<Skills />} />
             <Route path="/experience" element={<Experience />} />
-            <Route path="/blog" element={<Blog />} />
+            {/* <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/:slug" element={<BlogPost />} /> */}
             <Route path="/contact" element={<Contact />} />
           </Routes>
         </main>
