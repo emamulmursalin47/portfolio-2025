@@ -47,7 +47,7 @@ const Header = () => {
         isScrolled ? 'bg-black/80 backdrop-blur-md' : 'bg-transparent'
       }`}
     >
-       <FloatingIcons/>
+     <FloatingIcons/>
       <nav className="container mx-auto px-6 py-4 flex items-center justify-between">
         <Link to="/" className="text-2xl font-bold text-white">
           EM<span className="text-purple-500">.</span>

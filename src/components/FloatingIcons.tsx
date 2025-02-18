@@ -148,7 +148,7 @@ const FloatingIcons: React.FC = () => {
   
     return (
       <div className="  ">
-        <div ref={iconsContainerRef} className="absolute inset-0 flex items-center justify-center">
+        <div ref={iconsContainerRef} className="absolute inset-0 flex items-center opacity-35 justify-center">
           {techStack.map((tech) => (
             <motion.div
               key={tech.id}
