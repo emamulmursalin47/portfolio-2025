@@ -89,18 +89,19 @@ const Home = () => {
               </motion.p>
               
               <div className="flex flex-wrap gap-4">
-                <Link to="/projects">
+                <a href="#projects">
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     className="bg-purple-600 text-white px-6 py-3 rounded-full flex items-center gap-2 hover:bg-purple-700 transition-colors"
+                    
                   >
                     View Projects <ArrowRight size={20} />
                   </motion.button>
-                </Link>
+                </a>
                 
                 <motion.a
-                  href="/resume.pdf"
+                  href="https://drive.google.com/uc?export=download&id=11rKY_BBFeHaj0FaorSERMRZL2ebiusCZ"
                   download
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}

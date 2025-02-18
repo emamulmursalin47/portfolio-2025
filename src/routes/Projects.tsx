@@ -14,71 +14,64 @@ const Projects = () => {
 
   const projects = [
     {
-      title: 'Online Donation Platform',
-      description: 'A full-stack donation platform with real-time updates and payment integration.',
-      image: 'https://i.ibb.co.com/PZHPPqqY/Screenshot-2025-02-18-210952.png',
-      tags: ['React', 'Node.js', 'TypeScript', 'TailwindCss','Payment Gateway Integration','Responsive Web Design'],
-    
-      demo: 'https://donation.atcacademy.online/',
+      "title": "Online Donation Platform",
+      "description": "A full-stack donation platform with real-time updates, secure payment gateway integration, and a responsive UI to facilitate seamless contributions.",
+      "image": "https://i.ibb.co.com/PZHPPqqY/Screenshot-2025-02-18-210952.png",
+      "tags": ["React", "Node.js", "TypeScript", "TailwindCSS", "Payment Gateway Integration", "MongoDB", "ExpressJS", "Responsive Web Design"],
+      "demo": "https://donation.atcacademy.online/"
     },
     {
-      title: 'A Software Academy Website',
-      description: 'Comprehensive solution for inventory management and prescription tracking.',
-      image: 'https://i.ibb.co.com/mC9dbkK6/Screenshot-2025-02-18-211227.png',
-      tags: ['ReactJS', 'MySQL', 'TailwindCSS', 'ExpressJS','Framer-motion',''],
-      github: '',
-      demo: 'https://atcacademy.online/',
+      "title": "A Software Academy Website",
+      "description": "An interactive and dynamic educational platform for ATC Soft Academy, providing course listings, enrollment features, and an intuitive UI/UX for students and instructors.",
+      "image": "https://i.ibb.co.com/mC9dbkK6/Screenshot-2025-02-18-211227.png",
+      "tags": ["ReactJS", "MySQL", "TailwindCSS", "ExpressJS", "Framer Motion", "Node.js", "REST API"],
+      "demo": "https://atcacademy.online/"
     },
     {
-      title: 'Bajan Agro Farm',
-      description: 'Comprehensive solution for inventory management and prescription tracking.',
-      image: 'https://i.ibb.co.com/rG42J0qg/Screenshot-2025-02-18-213645.png',
-      tags: ['ReactJS', 'TailwindCSS','Framer-motion'],
-      github: '',
-      demo: 'https://bajanagrofarm.vercel.app/',
+      "title": "Bajan Agro Farm",
+      "description": "A modern farm management website for BAJAN Agro Farm, offering real-time inventory tracking, livestock management, and environmental monitoring for optimized operations.",
+      "image": "https://i.ibb.co.com/rG42J0qg/Screenshot-2025-02-18-213645.png",
+      "tags": ["ReactJS", "TailwindCSS", "Framer Motion", "NextJS", "Responsive Web Design"],
+      "demo": "https://bajanagrofarm.vercel.app/"
     },
     {
-      title: 'Cloth Processing System',
-      description: 'Comprehensive solution for inventory management and prescription tracking.',
-      image: 'https://i.ibb.co.com/Z6bbWjjt/Screenshot-2025-02-18-214008.png',
-      tags: ['ReactJS', 'TailwindCSS','Framer-motion'],
-      github: '',
-      demo: 'https://cloth-processing-management.vercel.app/',
+      "title": "Cloth Processing System",
+      "description": "A streamlined web application for managing cloth processing operations, including order tracking, inventory management, and automation for enhanced efficiency.",
+      "image": "https://i.ibb.co.com/Z6bbWjjt/Screenshot-2025-02-18-214008.png",
+      "tags": ["ReactJS", "TailwindCSS", "Framer Motion", "Node.js", "MongoDB", "ExpressJS"],
+      "demo": "https://cloth-processing-management.vercel.app/"
     },
     {
-      title: 'A Tech Company Portfolio',
-      description: 'Comprehensive solution for inventory management and prescription tracking.',
-      image: 'https://i.ibb.co.com/Y4nQw7ny/Screenshot-2025-02-18-214207.png',
-      tags: ['NextJS', 'TailwindCSS','Framer-motion','GSAP'],
-      github: '',
-      demo: 'https://arviontech.vercel.app/',
+      "title": "A Tech Company Portfolio",
+      "description": "A sleek and modern portfolio website for a tech company, showcasing services, projects, and expertise with engaging animations and smooth navigation.",
+      "image": "https://i.ibb.co.com/Y4nQw7ny/Screenshot-2025-02-18-214207.png",
+      "tags": ["NextJS", "TailwindCSS", "Framer Motion", "GSAP", "React Three Fiber"],
+      "demo": "https://arviontech.vercel.app/"
     },
     {
-      title: 'Prize Bond Checker',
-      description: 'Comprehensive solution for inventory management and prescription tracking.',
-      image: 'https://i.ibb.co.com/gZZjT2Dn/Screenshot-2025-02-18-214523.png',
-      tags: ['ReactJS', 'TailwindCSS','Framer-motion'],
-      github: '',
-      demo: 'https://prizebondchecker.vercel.app/',
-    },
-
-    {
-      title: 'eApproval System',
-      description: 'AI-powered drone surveillance system using YOLOv4 and DeepSort.',
-      image: 'https://media.licdn.com/dms/image/v2/D4D2DAQEubY_txu1Wsg/profile-treasury-image-shrink_800_800/profile-treasury-image-shrink_800_800/0/1732163717887?e=1740499200&v=beta&t=pyMfB8sMPly0wEgkj-yFG8QPT8fih-VCG8mQ1CAJHXM',
-      tags: ['Python', 'TensorFlow', 'OpenCV', 'YOLOv4'],
-      github: 'https://github.com/yourusername/uav-detection',
-      demo: 'https://uav-detection.demo.com',
+      "title": "Prize Bond Checker",
+      "description": "A digital tool for checking prize bond results with a user-friendly interface, allowing users to verify winnings quickly and efficiently.",
+      "image": "https://i.ibb.co.com/gZZjT2Dn/Screenshot-2025-02-18-214523.png",
+      "tags": ["ReactJS", "TailwindCSS", "Framer Motion", "NextJS", "REST API Integration"],
+      "demo": "https://prizebondchecker.vercel.app/"
     },
     {
-      title: 'Probashi',
-      description: 'AI-powered drone surveillance system using YOLOv4 and DeepSort.',
-      image: 'https://i.ibb.co.com/YBdTmFQc/Screenshot-2025-02-18-213127.png',
-      tags: ['ReactJS', 'TailwindCSS', 'Framer Motion'],
-      github: 'https://github.com/yourusername/uav-detection',
-      demo: 'https://probashivi.netlify.app/',
+      "title": "eApproval System",
+      "description": "A secure digital approval system with automated workflows, document management, and role-based access, improving efficiency in enterprise operations.",
+      "image": "https://media.licdn.com/dms/image/v2/D4D2DAQEubY_txu1Wsg/profile-treasury-image-shrink_800_800/profile-treasury-image-shrink_800_800/0/1732163717887?e=1740499200&v=beta&t=pyMfB8sMPly0wEgkj-yFG8QPT8fih-VCG8mQ1CAJHXM",
+      "tags": ["Python", "Flask", "MongoDB", "ReactJS", "Redux", "Node.js"],
+      "github": "https://github.com/yourusername/eapproval-system",
+      "demo": "https://eapproval.demo.com"
     },
-  ];
+    {
+      "title": "Probashi",
+      "description": "A web platform designed to support expatriates, providing essential resources, community connections, and integration support for smoother transitions.",
+      "image": "https://i.ibb.co.com/YBdTmFQc/Screenshot-2025-02-18-213127.png",
+      "tags": ["ReactJS", "TailwindCSS", "Framer Motion", "NextJS", "MongoDB"],
+      "github": "https://github.com/yourusername/probashi",
+      "demo": "https://probashivi.netlify.app/"
+    }
+  ]
 //@ts-ignore
   const addToProjectRefs = (el) => {
     //@ts-ignore

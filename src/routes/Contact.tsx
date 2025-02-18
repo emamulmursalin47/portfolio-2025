@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Phone, MapPin, Send, Linkedin, Github, Twitter } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, Linkedin, Github,  } from 'lucide-react';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -50,7 +50,8 @@ const Contact = () => {
                 </div>
                 <div>
                   <h3 className="text-lg font-semibold text-white mb-1">Email</h3>
-                  <p className="text-gray-300">emamulmursalin.ice@gmail.com</p>
+                  <p className="text-gray-300">emamulmursalin.ice@gmail.com </p>
+                  <p className="text-gray-300">emamulmursalin47@gmail.com </p>
                 </div>
               </motion.div>
 
@@ -65,7 +66,7 @@ const Contact = () => {
                 </div>
                 <div>
                   <h3 className="text-lg font-semibold text-white mb-1">Phone</h3>
-                  <p className="text-gray-300">+880 1234-567890</p>
+                  <p className="text-gray-300">+8801738753102 -WhatsApp</p>
                 </div>
               </motion.div>
 
@@ -94,9 +95,9 @@ const Contact = () => {
               <h3 className="text-xl font-semibold text-white mb-4">Follow Me</h3>
               <div className="flex gap-4">
                 {[
-                  { icon: <Linkedin className="w-5 h-5" />, href: 'https://linkedin.com/in/yourusername' },
-                  { icon: <Github className="w-5 h-5" />, href: 'https://github.com/yourusername' },
-                  { icon: <Twitter className="w-5 h-5" />, href: 'https://twitter.com/yourusername' },
+                  { icon: <Linkedin className="w-5 h-5" />, href: 'https://linkedin.com/in/mdemamulmursalin' },
+                  { icon: <Github className="w-5 h-5" />, href: 'https://github.com/emamulmursalin47' },
+              
                 ].map((social, index) => (
                   <motion.a
                     key={index}

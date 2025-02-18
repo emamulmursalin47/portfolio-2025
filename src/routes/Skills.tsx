@@ -1,9 +1,21 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import  { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { motion } from 'framer-motion'; // Import motion from framer-motion
+import { motion } from 'framer-motion';
+// Import React Icons
+import { 
+  SiNextdotjs, SiReact, SiJavascript, SiTailwindcss, SiBootstrap,
+  SiPhp, SiMysql, SiPython, SiNodedotjs, 
+  SiGithub, SiC, SiCplusplus, SiFirebase, SiLinux,
+  SiTensorflow, SiJira, SiZendesk, SiMiro,
+} from 'react-icons/si';
+import { MdOutlineDesignServices, MdStars } from 'react-icons/md';
+import { GrCertificate } from 'react-icons/gr';
+import { BiCodeAlt, BiGitPullRequest } from 'react-icons/bi';
+import { FaProjectDiagram, FaCode, FaCodeBranch } from 'react-icons/fa';
+import { DiJava } from 'react-icons/di';
 
 // Register ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
@@ -13,6 +25,43 @@ const Skills = () => {
   const progressRefs = useRef([]);
   const certificationRef = useRef(null);
   const toolsRef = useRef(null);
+  const githubStatsRef = useRef(null);
+
+  // GitHub username - replace with your own
+  const githubUsername = 'emamulmursalin47';
+
+  // Map icons to each skill
+  //@ts-ignore
+  const getSkillIcon = (skillName) => {
+    const iconMap = {
+      'NextJS': <SiNextdotjs className="inline-block mr-2 text-lg" />,
+      'ReactJS': <SiReact className="inline-block mr-2 text-lg" />,
+      'JavaScript': <SiJavascript className="inline-block mr-2 text-lg" />,
+      'TailwindCSS': <SiTailwindcss className="inline-block mr-2 text-lg" />,
+      'ShadCN': <MdOutlineDesignServices className="inline-block mr-2 text-lg" />,
+      'Bootstrap': <SiBootstrap className="inline-block mr-2 text-lg" />,
+      'PHP': <SiPhp className="inline-block mr-2 text-lg" />,
+      'MySQL': <SiMysql className="inline-block mr-2 text-lg" />,
+      'Python': <SiPython className="inline-block mr-2 text-lg" />,
+      'Node.js': <SiNodedotjs className="inline-block mr-2 text-lg" />,
+      'Scrum (SFC)': <GrCertificate className="inline-block mr-2 text-lg" />,
+      'Jira': <SiJira className="inline-block mr-2 text-lg" />,
+      'ZenDesk': <SiZendesk className="inline-block mr-2 text-lg" />,
+      'Miro': <SiMiro className="inline-block mr-2 text-lg" />,
+      'Github': <SiGithub className="inline-block mr-2 text-lg" />,
+      'C': <SiC className="inline-block mr-2 text-lg" />,
+      'C++': <SiCplusplus className="inline-block mr-2 text-lg" />,
+      'Java': <DiJava className="inline-block mr-2 text-lg" />,
+      'Firebase': <SiFirebase className="inline-block mr-2 text-lg" />,
+      'Linux': <SiLinux className="inline-block mr-2 text-lg" />,
+      'YOLOv4': <BiCodeAlt className="inline-block mr-2 text-lg" />,
+      'DeepSort': <BiCodeAlt className="inline-block mr-2 text-lg" />,
+      'Object Detection': <FaProjectDiagram className="inline-block mr-2 text-lg" />,
+      'TensorFlow': <SiTensorflow className="inline-block mr-2 text-lg" />,
+    };
+    //@ts-ignore
+    return iconMap[skillName] || <BiCodeAlt className="inline-block mr-2 text-lg" />;
+  };
 
   const skillCategories = [
     {
@@ -154,6 +203,27 @@ const Skills = () => {
       }
     );
 
+    // Animate GitHub stats section
+    gsap.fromTo(
+      githubStatsRef.current,
+      {
+        y: 50,
+        opacity: 0,
+      },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 1,
+        scrollTrigger: {
+          trigger: githubStatsRef.current,
+          start: 'top center+=100',
+          end: 'top center-=100',
+          scrub: 1,
+          toggleActions: 'play reverse play reverse'
+        }
+      }
+    );
+
     return () => {
       ScrollTrigger.getAll().forEach(trigger => trigger.kill());
     };
@@ -180,7 +250,7 @@ const Skills = () => {
   return (
     <div className="container mx-auto px-4 py-24" id="skills">
       <div className=''>
-        <h1 className="text-4xl  font-bold text-white mb-12">Skills & Expertise</h1>
+        <h1 className="text-4xl font-bold text-white mb-12">Skills & Expertise</h1>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {skillCategories.map((category, categoryIndex) => (
@@ -194,7 +264,9 @@ const Skills = () => {
                 {category.skills.map((skill, skillIndex) => (
                   <div key={skillIndex}>
                     <div className="flex justify-between mb-2">
-                      <span className="text-gray-300">{skill.name}</span>
+                      <span className="text-gray-300 flex items-center">
+                        {getSkillIcon(skill.name)} {skill.name}
+                      </span>
                       <span className="text-purple-400">{skill.level}%</span>
                     </div>
                     <div className="h-2 bg-gray-700 rounded-full overflow-hidden">
@@ -211,29 +283,33 @@ const Skills = () => {
           ))}
         </div>
 
-        <div className="mt-12 w-[600px] grid grid-cols-12 md:grid-cols-1 gap-8">
+        <div className="mt-12 w-full grid grid-cols-1 md:grid-cols-1 gap-8">
           <div
             ref={certificationRef}
-            className="bg-black/30 backdrop-blur-md  rounded-xl p-6"
+            className="bg-black/30 backdrop-blur-md rounded-xl p-6"
           >
             <h2 className="text-2xl font-bold text-white mb-6">Certifications</h2>
             <div className="space-y-4">
               <div className="p-4 bg-purple-500/10 rounded-lg">
-                <h3 className="text-lg font-semibold text-white">HTML5/CSS3 Certification</h3>
+                <h3 className="text-lg font-semibold text-white flex items-center">
+                  <GrCertificate className="mr-2 text-lg" /> HTML5/CSS3 Certification
+                </h3>
                 <p className="text-gray-400">ID: 666629fc...</p>
               </div>
               <div className="p-4 bg-purple-500/10 rounded-lg">
-                <h3 className="text-lg font-semibold text-white">Scrum Fundamentals (SFC)</h3>
+                <h3 className="text-lg font-semibold text-white flex items-center">
+                  <GrCertificate className="mr-2 text-lg" /> Scrum Fundamentals (SFC)
+                </h3>
                 <p className="text-gray-400">Certified Scrum Developer</p>
               </div>
               <div className="p-4 bg-purple-500/10 rounded-lg">
-                <h3 className="text-lg font-semibold text-white">Adobe Illustrator Certification</h3>
+                <h3 className="text-lg font-semibold text-white flex items-center">
+                  <GrCertificate className="mr-2 text-lg" /> Adobe Illustrator Certification
+                </h3>
                 <p className="text-gray-400">ID: 64554302...</p>
               </div>
             </div>
           </div>
-
-         
         </div>
       </div>
 
@@ -242,23 +318,29 @@ const Skills = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.3 }}
         className="mt-16"
+        ref={githubStatsRef}
       >
-        <h2 className="text-3xl font-bold text-white dark:text-white mb-8">GitHub Statistics</h2>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-         
-          
-        </div>
+        <h2 className="text-3xl font-bold text-white dark:text-white mb-8 flex items-center">
+          <SiGithub className="mr-3 text-2xl" /> GitHub Statistics
+        </h2>
+        
+       
+        
+        {/* Contribution Calendar */}
         
         
-
+        {/* Activity Graph */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5, delay: 0.6 }}
-          className="bg-white/30 dark:bg-black/30 backdrop-blur-md rounded-xl p-6"
+          transition={{ duration: 0.5, delay: 0.7 }}
+          className="bg-black/30 backdrop-blur-md rounded-xl p-6"
         >
+          <h3 className="text-xl font-semibold text-white mb-4 flex items-center">
+            <BiGitPullRequest className="mr-2 text-purple-400" /> Contribution Activity
+          </h3>
           <img
-            src="https://github-readme-activity-graph.vercel.app/graph?username=emamulmursalin47&theme=github-light&hide_border=true"
+            src={`https://github-readme-activity-graph.vercel.app/graph?username=${githubUsername}&theme=react-dark&hide_border=true&bg_color=00000000`}
             alt="Activity Graph"
             className="w-full"
           />
