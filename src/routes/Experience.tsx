@@ -19,24 +19,28 @@ const Experience = () => {
     {
       title: 'System Architecture Specialist',
       company: 'ATC Tech Ltd',
-      period: '2024 - Present',
+      period: '2025 - Present',
       description: 'Leading system architecture design and implementation for enterprise solutions.',
       achievements: [
-        'Optimized system performance by 40%',
-        'Led team of 5 developers',
-        'Implemented microservices architecture',
+        'Designed and implemented scalable, high-performance IT system architectures to meet business needs.',
+        'Developed system models, workflows, and integration strategies to optimize infrastructure efficiency.',
+        'Led the evaluation and adoption of emerging technologies to enhance system security and reliability.',
+        'Conducted performance analysis and troubleshooting to identify and resolve system bottlenecks.',
+        'Collaborated with cross-functional teams to design and integrate complex IT solutions.',
+        'Provided technical leadership and mentorship to developers and IT teams on architecture best practices.'
       ],
       icon: <Briefcase className="w-6 h-6" />,
     },
     {
-      title: 'Executive Officer',
+      title: 'Sr. Executive Officer',
       company: 'ATC Tech Ltd',
-      period: '2023 - 2024',
+      period: '2024 - 2025',
       description: 'Managed technical operations and development projects.',
       achievements: [
-        'Developed AI-driven UAV detection system',
-        'Reduced deployment time by 60%',
-        'Implemented CI/CD pipeline',
+        'Developed and maintained websites using HTML, CSS, JavaScript, React.js PHP, and MySQL.',
+        'Implemented responsive design to ensure websites are mobile-friendly. ',
+        'Collaborated with senior developers to troubleshoot and resolve technical issues',
+        'Provided Technical Support and training to clients and team members.'
       ],
       icon: <Briefcase className="w-6 h-6" />,
     },
@@ -58,9 +62,8 @@ const Experience = () => {
       period: '2020 - 2024',
       description: 'Bachelor of Science in Information & Communication Engineering',
       achievements: [
-        'CGPA: 3.92/4.00',
-        'President of ICT Club',
-        'Published research paper on UAV detection',
+        'CGPA: 3.35/4.00',
+      
       ],
       icon: <GraduationCap className="w-6 h-6" />,
     },
@@ -70,13 +73,20 @@ const Experience = () => {
     {
       title: 'Organizing Secretary',
       organization: 'BAUET ICT Club',
-      period: '2023 - 2024',
+      period: '2023',
       description: 'Led organization of technical events and workshops.',
       icon: <Award className="w-6 h-6" />,
     },
     {
       title: 'Event Management Officer',
       organization: 'Hult Prize BAUET',
+      period: '2022 - 2023',
+      description: 'Coordinated international entrepreneurship competition events.',
+      icon: <Award className="w-6 h-6" />,
+    },
+    {
+      title: 'Joint Secretary',
+      organization: 'BAUET Career Club',
       period: '2022 - 2023',
       description: 'Coordinated international entrepreneurship competition events.',
       icon: <Award className="w-6 h-6" />,
