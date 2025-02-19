@@ -1,6 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Menu, X, Sun, Moon } from 'lucide-react';
 import FloatingIcons from './FloatingIcons';
@@ -35,19 +33,14 @@ const Header = () => {
     { hash: '#projects', label: 'Projects' },
     { hash: '#skills', label: 'Skills' },
     { hash: '#experience', label: 'Experience' },
-    // { hash: '#blog', label: 'Blog' },
     { hash: '#contact', label: 'Contact' },
   ];
 
   return (
-    <motion.header
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      className={`fixed w-full z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-black/80 backdrop-blur-md' : 'bg-transparent'
-      }`}
-    >
-     <FloatingIcons/>
+    <header className={`fixed w-full z-50 transition-all duration-300 ${
+      isScrolled ? 'bg-black/80 backdrop-blur-md' : 'bg-transparent'
+    }`}>
+    
       <nav className="container mx-auto px-6 py-4 flex items-center justify-between">
         <Link to="/" className="text-2xl font-bold text-white">
           EM<span className="text-purple-500">.</span>
@@ -79,7 +72,7 @@ const Header = () => {
           </button>
         </div>
 
-        {/* Mobile Menu */}
+        {/* Mobile Menu Button */}
         <div className="md:hidden flex items-center space-x-4">
           <button
             onClick={() => setIsDark(!isDark)}
@@ -87,43 +80,43 @@ const Header = () => {
           >
             {isDark ? <Sun className="w-5 h-5 text-gray-300" /> : <Moon className="w-5 h-5 text-gray-300" />}
           </button>
-          <button onClick={() => setIsOpen(!isOpen)} className="p-2 text-white">
+          <button 
+            onClick={() => setIsOpen(!isOpen)} 
+            className="p-2 text-white"
+            aria-label="Toggle menu"
+          >
             {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
       </nav>
 
       {/* Mobile Navigation */}
-      <motion.div
-        initial={{ x: '100%' }}
-        animate={{ x: isOpen ? 0 : '100%' }}
-        transition={{ type: 'spring', stiffness: 100 }}
-        className={`fixed top-0 right-0 h-full w-64 bg-purple-950 backdrop-blur-lg p-6 flex flex-col space-y-6 items-center md:hidden transition-transform duration-300 ${
+      <div 
+        className={`fixed top-0 right-0 h-full w-64 bg-purple-950/90 backdrop-blur-lg p-6 transform transition-transform duration-300 ease-in-out md:hidden ${
           isOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
-        <button onClick={() => setIsOpen(false)} className="absolute top-4 right-4 text-white">
-          <X className="w-6 h-6" />
-        </button>
-        {navItems.map((item) => (
-          <a
-            key={item.hash}
-            href={item.hash}
-            onClick={(e) => {
-              e.preventDefault();
-              document.querySelector(item.hash)?.scrollIntoView({ behavior: 'smooth' });
-              setActiveSection(item.hash);
-              setIsOpen(false);
-            }}
-            className={`text-lg font-medium transition-colors ${
-              activeSection === item.hash ? 'text-purple-400' : 'text-gray-300 hover:text-white'
-            }`}
-          >
-            {item.label}
-          </a>
-        ))}
-      </motion.div>
-    </motion.header>
+        <div className="flex flex-col space-y-6 items-center pt-12">
+          {navItems.map((item) => (
+            <a
+              key={item.hash}
+              href={item.hash}
+              onClick={(e) => {
+                e.preventDefault();
+                document.querySelector(item.hash)?.scrollIntoView({ behavior: 'smooth' });
+                setActiveSection(item.hash);
+                setIsOpen(false);
+              }}
+              className={`text-lg font-medium transition-colors ${
+                activeSection === item.hash ? 'text-purple-400' : 'text-gray-300 hover:text-white'
+              }`}
+            >
+              {item.label}
+            </a>
+          ))}
+        </div>
+      </div>
+    </header>
   );
 };
 
